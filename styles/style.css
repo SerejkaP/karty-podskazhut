@@ -69,6 +69,7 @@ figure {
 
 .content__text-block {
   font-size: 18px;
+  line-height: 1.175;
 }
 
 .content__text-block .content__paragraph:not(:last-of-type) {
@@ -77,14 +78,28 @@ figure {
 
 .content__link {
   color: currentColor;
+  text-decoration: none;
+  position: relative;
+  white-space: nowrap;
 }
 
-.content__link:hover {
-  text-decoration-color: rgba(49, 42, 78, 0.5);
+.content__link::after {
+  content: "";
+  display: block;
+  position: absolute;
+  block-size: 1px;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  background-color: currentColor;
+  inline-size: 100%;
 }
 
-.theme_dark .content__link:hover {
-  text-decoration-color: rgba(179, 179, 179, 0.5);
+.content__link:hover::after {
+  opacity: 0.5;
+}
+
+.content__link:focus {
+  outline: none;
 }
 
 .content__link:focus-visible {
@@ -119,12 +134,11 @@ figure {
   display: inline-block;
   position: absolute;
   inline-size: 15px;
-  block-size: 15px;
+  block-size: 100%;
   background-image: url(../images/marker-light.svg);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-  inset-block-start: 3px;
   inset-inline-start: -25px;
 }
 
@@ -139,7 +153,8 @@ figure {
   font-weight: 700;
   background-color: var(--accent-color, #ffab6b);
   padding: 0 4px;
-  margin-inline-end: 1px;
+  margin-inline-end: 4px;
+  margin-inline-start: -3px;
 }
 
 .theme_dark
@@ -166,6 +181,8 @@ figure {
   padding: 20px 0;
   text-align: center;
   border-block-end: 1px solid currentColor;
+  font-size: 18px;
+  font-weight: 400;
 }
 
 .content__card {
@@ -200,7 +217,6 @@ figure {
 }
 
 .theme_dark .colored-text::after {
-  background-color: var(--accent-color, transparent);
   background-image: url(../images/pattern.svg);
 }
 
@@ -213,6 +229,12 @@ figure {
   justify-content: space-between;
   align-items: center;
   padding: 20px 5vw;
+  border-block-start: 1px solid currentColor;
+  border-block-end: 1px solid currentColor;
+}
+
+.header__logo {
+  color: inherit;
 }
 
 .header__theme-toggler {
@@ -233,16 +255,22 @@ figure {
   padding: 0;
   border: none;
   position: relative;
-  box-sizing: border-box;
 }
 
-.header__theme-button:not(.header__theme-button_is-active):hover {
-  text-decoration: underline;
-  text-decoration-color: rgba(49, 42, 78, 0.5);
+.header__theme-button:not(.header__theme-button_is-active):hover::after {
+  content: "";
+  display: block;
+  position: absolute;
+  block-size: 1px;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  background-color: currentColor;
+  opacity: 0.5;
+  inline-size: 100%;
 }
 
-.theme_dark .header__theme-button:not(.header__theme-button_is-active):hover {
-  text-decoration-color: rgba(179, 179, 179, 0.5);
+.header__theme-button:focus {
+  outline: none;
 }
 
 .header__theme-button:focus-visible {
@@ -270,7 +298,6 @@ figure {
 }
 
 .theme_dark .header__theme-button_is-active::after {
-  background-color: var(--accent-color, transparent);
   background-image: url(../images/pattern.svg);
 }
 
